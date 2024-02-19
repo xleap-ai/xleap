@@ -31,11 +31,7 @@ class TextStatMetric(Metric):
         self._stat = textstat.textstat.__getattribute__(self.stat_metric.stat_name)
 
     def compute(self, df: pd.Series, force=False) -> ItemResult:
-        if not force and df[self.name] is not None:
-            logger.info(f"skipping : {self.name} metric already evaluated")
-            return df[self.name]
-
-        return ItemResult(self._stat(df[self.column]), None)
+        return super().compute(df, force) or ItemResult(self._stat(df[self.column]), self.name)
 
     def __repr__(self) -> str:
         return f"{self.__class__.__name__} ({self.name})"
@@ -75,12 +71,10 @@ _text_stat_metrics: list[TextStatLabel] = [
     TextStatLabel("difficult_words"),
 ]
 
-metrics: list[Metric] = []
+text_stat_metrics: list[Metric] = []
 columns = [config.prompt_column, config.response_column]
 
 for column in columns:
     for metric in _text_stat_metrics:
-        ins = TextStatMetric(
-            batch_size=config.batch_size, stat_metric=metric, column=column
-        )
-        metrics.append(ins)
+        ins = TextStatMetric(batch_size=config.batch_size, stat_metric=metric, column=column)
+        text_stat_metrics.append(ins)

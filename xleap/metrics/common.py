@@ -1,3 +1,4 @@
+import logging
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from math import floor
@@ -8,11 +9,16 @@ from tqdm import tqdm
 from xleap.metrics.llm_factory import XLeapLLM, llm_factory
 from xleap.metrics.validation import EvaluationMode
 
+logger = logging.getLogger(__name__)
+
 
 @dataclass
 class ItemResult:
     value: str
     reason: str | None = None
+
+    def __bool__(self):
+        return bool(self.value)
 
 
 def make_batches(total_size: int, batch_size: int) -> list[range]:
@@ -21,9 +27,7 @@ def make_batches(total_size: int, batch_size: int) -> list[range]:
     """
     tail = total_size % batch_size
     num_batches = floor(total_size / batch_size)
-    batches = [
-        range(i, i + batch_size) for i in range(0, batch_size * num_batches, batch_size)
-    ]
+    batches = [range(i, i + batch_size) for i in range(0, batch_size * num_batches, batch_size)]
     if tail != 0:
         batches.append(range(batch_size * num_batches, batch_size * num_batches + tail))
 
@@ -62,7 +66,14 @@ class Metric(ABC):
         return scores
 
     def _score_batch(self, dataset: pd.DataFrame, force=False) -> list[ItemResult]:
-        return [self.compute(j, force=force) for i, j in dataset.iterrows()]
+        results = []
+        for i, j in dataset.iterrows():
+            try:
+                results.append(self.compute(j, force=force))
+            except:
+                results.append(ItemResult(value=None))
+
+        return results
 
     @abstractmethod
     def compute(self, df: pd.Series, force=False) -> ItemResult:
@@ -73,6 +84,7 @@ class Metric(ABC):
         set force=True to re-evaluate metric all the times
         """
         if not force and df[self.name] is not None:
+            # logger.info(f"skipping : {self.name} metric already evaluated")
             return df[self.name]
 
     def get_batches(self, dataset_size: int) -> list[range]:
