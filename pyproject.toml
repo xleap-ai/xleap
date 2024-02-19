@@ -1,9 +1,9 @@
 [tool.poetry]
 authors     = ["Pritam Soni <23050213+pritamsoni-hsr@users.noreply.github.com>"]
-description = ""
+description = "xleap's python sdk"
 name        = "xleap"
 readme      = "README.md"
-version     = "0.1.2"
+version     = "0.1.4"
 
 include  = ["CHANGELOG.md"]
 packages = [{ include = "xleap" }]
@@ -29,8 +29,8 @@ packages = [{ include = "xleap" }]
   mkdocstrings    = { extras = ["crystal", "python"], version = "^0.24.0" }
 
   [tool.poetry.group.additional.dependencies]
-  evaluate              = "^0.4.1"
-  sentence-transformers = "^2.3.1"
+  evaluate              = { version = "^0.4.1", optional = true }
+  sentence-transformers = { version = "^2.3.1", optional = true }
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
@@ -39,3 +39,6 @@ requires      = ["poetry-core"]
 [tool.ruff]
 line-length = 120
 select      = ["F", "I"]
+
+[tool.poetry.extras]
+all = ["evaluate", "sentence-transformers"]
