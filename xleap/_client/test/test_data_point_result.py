@@ -14,11 +14,11 @@
 
 import unittest
 
-from xleap._client.models.data_point_create import DataPointCreate
+from xleap._client.models.data_point_result import DataPointResult
 
 
-class TestDataPointCreate(unittest.TestCase):
-    """DataPointCreate unit test stubs"""
+class TestDataPointResult(unittest.TestCase):
+    """DataPointResult unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,36 +26,26 @@ class TestDataPointCreate(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> DataPointCreate:
-        """Test DataPointCreate
+    def make_instance(self, include_optional) -> DataPointResult:
+        """Test DataPointResult
         include_option is a boolean, when False only required
         params are included, when True both required and
         optional params are included"""
-        # uncomment below to create an instance of `DataPointCreate`
+        # uncomment below to create an instance of `DataPointResult`
         """
-        model = DataPointCreate()
+        model = DataPointResult()
         if include_optional:
-            return DataPointCreate(
-                question = '',
-                answer = '',
-                ground_truths = [
-                    null
-                    ],
-                contexts = [
-                    ''
-                    ],
-                project = '',
-                tags = None
+            return DataPointResult(
+                results = xleap._client.models.results.results(),
+                reasons = xleap._client.models.reasons.reasons()
             )
         else:
-            return DataPointCreate(
-                question = '',
-                answer = '',
+            return DataPointResult(
         )
         """
 
-    def testDataPointCreate(self):
-        """Test DataPointCreate"""
+    def testDataPointResult(self):
+        """Test DataPointResult"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

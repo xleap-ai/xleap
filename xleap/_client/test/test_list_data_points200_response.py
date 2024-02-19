@@ -41,15 +41,18 @@ class TestListDataPoints200Response(unittest.TestCase):
                 results = [
                     xleap._client.models.data_point.DataPoint(
                         id = '', 
-                        prompt = '', 
-                        response = '', 
+                        question = '', 
+                        answer = '', 
+                        ground_truths = [
+                            null
+                            ], 
+                        result = xleap._client.models.data_point_result.DataPoint_result(
+                            results = xleap._client.models.results.results(), 
+                            reasons = xleap._client.models.reasons.reasons(), ), 
                         contexts = [
                             ''
                             ], 
-                        answers = [
-                            ''
-                            ], 
-                        result = xleap._client.models.result.result(), )
+                        tags = xleap._client.models.tags.tags(), )
                     ]
             )
         else:

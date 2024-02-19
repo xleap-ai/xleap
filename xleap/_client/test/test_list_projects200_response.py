@@ -41,6 +41,19 @@ class TestListProjects200Response(unittest.TestCase):
                 results = [
                     xleap._client.models.project.Project(
                         id = '', 
+                        config = xleap._client.models.project_config.Project_config(
+                            metric_name_map = xleap._client.models.metric_name_map.metric_name_map(), 
+                            transformer_name = '', 
+                            topics = [
+                                ''
+                                ], 
+                            nlp_scores = [
+                                ''
+                                ], 
+                            rouge_type = '', 
+                            scores = [
+                                ''
+                                ], ), 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         name = '', 

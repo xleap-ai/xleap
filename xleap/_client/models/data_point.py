@@ -19,7 +19,9 @@ import pprint
 import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List, Optional
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, StrictStr
+
+from xleap._client.models.data_point_result import DataPointResult
 
 try:
     from typing import Self
@@ -33,18 +35,20 @@ class DataPoint(BaseModel):
     """  # noqa: E501
 
     id: Optional[StrictStr] = None
-    prompt: Optional[StrictStr] = Field(default=None, description="question for LLM")
-    response: Optional[StrictStr] = Field(default=None, description="LLM response")
+    question: Optional[StrictStr] = None
+    answer: Optional[StrictStr] = None
+    ground_truths: List[Any]
+    result: DataPointResult
     contexts: Optional[List[StrictStr]] = None
-    answers: Optional[List[StrictStr]] = None
-    result: Optional[Dict[str, Any]] = None
+    tags: Optional[Dict[str, Any]] = None
     __properties: ClassVar[List[str]] = [
         "id",
-        "prompt",
-        "response",
-        "contexts",
-        "answers",
+        "question",
+        "answer",
+        "ground_truths",
         "result",
+        "contexts",
+        "tags",
     ]
 
     model_config = {
@@ -77,28 +81,25 @@ class DataPoint(BaseModel):
           were set at model initialization. Other fields with value `None`
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
                 "id",
+                "question",
+                "answer",
             },
             exclude_none=True,
         )
-        # set to None if prompt (nullable) is None
+        # override the default output from pydantic by calling `to_dict()` of result
+        if self.result:
+            _dict["result"] = self.result.to_dict()
+        # set to None if tags (nullable) is None
         # and model_fields_set contains the field
-        if self.prompt is None and "prompt" in self.model_fields_set:
-            _dict["prompt"] = None
-
-        # set to None if response (nullable) is None
-        # and model_fields_set contains the field
-        if self.response is None and "response" in self.model_fields_set:
-            _dict["response"] = None
-
-        # set to None if result (nullable) is None
-        # and model_fields_set contains the field
-        if self.result is None and "result" in self.model_fields_set:
-            _dict["result"] = None
+        if self.tags is None and "tags" in self.model_fields_set:
+            _dict["tags"] = None
 
         return _dict
 
@@ -114,11 +115,14 @@ class DataPoint(BaseModel):
         _obj = cls.model_validate(
             {
                 "id": obj.get("id"),
-                "prompt": obj.get("prompt"),
-                "response": obj.get("response"),
+                "question": obj.get("question"),
+                "answer": obj.get("answer"),
+                "ground_truths": obj.get("ground_truths"),
+                "result": DataPointResult.from_dict(obj.get("result"))
+                if obj.get("result") is not None
+                else None,
                 "contexts": obj.get("contexts"),
-                "answers": obj.get("answers"),
-                "result": obj.get("result"),
+                "tags": obj.get("tags"),
             }
         )
         return _obj

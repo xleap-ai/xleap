@@ -5,11 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] [readonly] 
-**prompt** | **str** | question for LLM | [optional] 
-**response** | **str** | LLM response | [optional] 
+**question** | **str** |  | 
+**answer** | **str** |  | 
+**ground_truths** | **List[object]** |  | [optional] 
 **contexts** | **List[str]** |  | [optional] 
-**answers** | **List[str]** |  | [optional] 
+**project** | **str** |  | [optional] 
+**tags** | **object** |  | [optional] 
 
 ## Example
 

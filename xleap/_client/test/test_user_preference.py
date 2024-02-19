@@ -14,11 +14,11 @@
 
 import unittest
 
-from xleap._client.models.data_point_create import DataPointCreate
+from xleap._client.models.user_preference import UserPreference
 
 
-class TestDataPointCreate(unittest.TestCase):
-    """DataPointCreate unit test stubs"""
+class TestUserPreference(unittest.TestCase):
+    """UserPreference unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,36 +26,25 @@ class TestDataPointCreate(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> DataPointCreate:
-        """Test DataPointCreate
+    def make_instance(self, include_optional) -> UserPreference:
+        """Test UserPreference
         include_option is a boolean, when False only required
         params are included, when True both required and
         optional params are included"""
-        # uncomment below to create an instance of `DataPointCreate`
+        # uncomment below to create an instance of `UserPreference`
         """
-        model = DataPointCreate()
+        model = UserPreference()
         if include_optional:
-            return DataPointCreate(
-                question = '',
-                answer = '',
-                ground_truths = [
-                    null
-                    ],
-                contexts = [
-                    ''
-                    ],
-                project = '',
-                tags = None
+            return UserPreference(
+                selected_project = ''
             )
         else:
-            return DataPointCreate(
-                question = '',
-                answer = '',
+            return UserPreference(
         )
         """
 
-    def testDataPointCreate(self):
-        """Test DataPointCreate"""
+    def testUserPreference(self):
+        """Test UserPreference"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

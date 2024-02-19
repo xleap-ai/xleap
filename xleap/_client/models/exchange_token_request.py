@@ -17,13 +17,11 @@ from __future__ import annotations
 import json
 import pprint
 import re  # noqa: F401
-from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 
-from pydantic import BaseModel, Field, StrictStr
-from typing_extensions import Annotated
+from pydantic import BaseModel, StrictStr, field_validator
 
-from xleap._client.models.project_config import ProjectConfig
+from xleap._client.models.exchange_token_request_user import ExchangeTokenRequestUser
 
 try:
     from typing import Self
@@ -31,25 +29,32 @@ except ImportError:
     from typing_extensions import Self
 
 
-class Project(BaseModel):
+class ExchangeTokenRequest(BaseModel):
     """
-    Project
+    ExchangeTokenRequest
     """  # noqa: E501
 
-    id: Optional[StrictStr] = None
-    config: ProjectConfig
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    name: Annotated[str, Field(strict=True, max_length=100)]
-    org: Optional[StrictStr] = None
+    token: StrictStr
+    provider: StrictStr
+    api_key: Optional[StrictStr] = None
+    access_token: Optional[StrictStr] = None
+    refresh_token: Optional[StrictStr] = None
+    user: Optional[ExchangeTokenRequestUser] = None
     __properties: ClassVar[List[str]] = [
-        "id",
-        "config",
-        "created_at",
-        "updated_at",
-        "name",
-        "org",
+        "token",
+        "provider",
+        "api_key",
+        "access_token",
+        "refresh_token",
+        "user",
     ]
+
+    @field_validator("provider")
+    def provider_validate_enum(cls, value):
+        """Validates the enum"""
+        if value not in ("google", "github"):
+            raise ValueError("must be one of enum values ('google', 'github')")
+        return value
 
     model_config = {
         "populate_by_name": True,
@@ -68,7 +73,7 @@ class Project(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of Project from a JSON string"""
+        """Create an instance of ExchangeTokenRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -87,25 +92,20 @@ class Project(BaseModel):
         _dict = self.model_dump(
             by_alias=True,
             exclude={
-                "id",
-                "created_at",
-                "updated_at",
+                "api_key",
+                "access_token",
+                "refresh_token",
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of config
-        if self.config:
-            _dict["config"] = self.config.to_dict()
-        # set to None if org (nullable) is None
-        # and model_fields_set contains the field
-        if self.org is None and "org" in self.model_fields_set:
-            _dict["org"] = None
-
+        # override the default output from pydantic by calling `to_dict()` of user
+        if self.user:
+            _dict["user"] = self.user.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of Project from a dict"""
+        """Create an instance of ExchangeTokenRequest from a dict"""
         if obj is None:
             return None
 
@@ -114,14 +114,14 @@ class Project(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "id": obj.get("id"),
-                "config": ProjectConfig.from_dict(obj.get("config"))
-                if obj.get("config") is not None
+                "token": obj.get("token"),
+                "provider": obj.get("provider"),
+                "api_key": obj.get("api_key"),
+                "access_token": obj.get("access_token"),
+                "refresh_token": obj.get("refresh_token"),
+                "user": ExchangeTokenRequestUser.from_dict(obj.get("user"))
+                if obj.get("user") is not None
                 else None,
-                "created_at": obj.get("created_at"),
-                "updated_at": obj.get("updated_at"),
-                "name": obj.get("name"),
-                "org": obj.get("org"),
             }
         )
         return _obj

@@ -19,7 +19,7 @@ import pprint
 import re  # noqa: F401
 from typing import Any, ClassVar, Dict, List, Optional
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, StrictStr
 
 try:
     from typing import Self
@@ -32,17 +32,19 @@ class DataPointCreate(BaseModel):
     DataPointCreate
     """  # noqa: E501
 
-    id: Optional[StrictStr] = None
-    prompt: Optional[StrictStr] = Field(default=None, description="question for LLM")
-    response: Optional[StrictStr] = Field(default=None, description="LLM response")
+    question: StrictStr
+    answer: StrictStr
+    ground_truths: Optional[List[Any]] = None
     contexts: Optional[List[StrictStr]] = None
-    answers: Optional[List[StrictStr]] = None
+    project: Optional[StrictStr] = None
+    tags: Optional[Dict[str, Any]] = None
     __properties: ClassVar[List[str]] = [
-        "id",
-        "prompt",
-        "response",
+        "question",
+        "answer",
+        "ground_truths",
         "contexts",
-        "answers",
+        "project",
+        "tags",
     ]
 
     model_config = {
@@ -74,24 +76,21 @@ class DataPointCreate(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "id",
-            },
+            exclude={},
             exclude_none=True,
         )
-        # set to None if prompt (nullable) is None
+        # set to None if project (nullable) is None
         # and model_fields_set contains the field
-        if self.prompt is None and "prompt" in self.model_fields_set:
-            _dict["prompt"] = None
+        if self.project is None and "project" in self.model_fields_set:
+            _dict["project"] = None
 
-        # set to None if response (nullable) is None
+        # set to None if tags (nullable) is None
         # and model_fields_set contains the field
-        if self.response is None and "response" in self.model_fields_set:
-            _dict["response"] = None
+        if self.tags is None and "tags" in self.model_fields_set:
+            _dict["tags"] = None
 
         return _dict
 
@@ -106,11 +105,12 @@ class DataPointCreate(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "id": obj.get("id"),
-                "prompt": obj.get("prompt"),
-                "response": obj.get("response"),
+                "question": obj.get("question"),
+                "answer": obj.get("answer"),
+                "ground_truths": obj.get("ground_truths"),
                 "contexts": obj.get("contexts"),
-                "answers": obj.get("answers"),
+                "project": obj.get("project"),
+                "tags": obj.get("tags"),
             }
         )
         return _obj

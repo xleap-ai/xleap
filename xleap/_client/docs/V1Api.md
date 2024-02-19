@@ -10,7 +10,7 @@ Method | HTTP request | Description
 [**create_metrics_data**](V1Api.md#create_metrics_data) | **POST** /v1/api/metrics | 
 [**create_ml_model**](V1Api.md#create_ml_model) | **POST** /v1/api/model | 
 [**create_org_list**](V1Api.md#create_org_list) | **POST** /v1/api/org | 
-[**create_project**](V1Api.md#create_project) | **POST** /v1/api/projects | 
+[**create_project_create**](V1Api.md#create_project_create) | **POST** /v1/api/projects | 
 [**create_prompt**](V1Api.md#create_prompt) | **POST** /v1/api/prompts | 
 [**create_run**](V1Api.md#create_run) | **POST** /v1/api/runs | 
 [**destroy_data_point**](V1Api.md#destroy_data_point) | **DELETE** /v1/api/data/{id} | 
@@ -19,8 +19,10 @@ Method | HTTP request | Description
 [**destroy_org_list**](V1Api.md#destroy_org_list) | **DELETE** /v1/api/org/{id} | 
 [**destroy_prompt**](V1Api.md#destroy_prompt) | **DELETE** /v1/api/prompts/{id} | 
 [**destroy_run**](V1Api.md#destroy_run) | **DELETE** /v1/api/runs/{id} | 
+[**exchange_token_exchange_token_request**](V1Api.md#exchange_token_exchange_token_request) | **POST** /v1/api/oauth/exchange-token | 
 [**get_api_key_token_obtain**](V1Api.md#get_api_key_token_obtain) | **POST** /v1/api/api-keys/get_api_key | 
 [**get_user_org_member**](V1Api.md#get_user_org_member) | **GET** /v1/api/api-keys/get_user | 
+[**get_user_settings_user_preference**](V1Api.md#get_user_settings_user_preference) | **GET** /v1/api/api-keys/get_user_settings | 
 [**list_api_keys**](V1Api.md#list_api_keys) | **GET** /v1/api/api-keys | 
 [**list_data_points**](V1Api.md#list_data_points) | **GET** /v1/api/data | 
 [**list_metrics_datas**](V1Api.md#list_metrics_datas) | **GET** /v1/api/metrics | 
@@ -38,6 +40,7 @@ Method | HTTP request | Description
 [**partial_update_prompt**](V1Api.md#partial_update_prompt) | **PATCH** /v1/api/prompts/{id} | 
 [**partial_update_run**](V1Api.md#partial_update_run) | **PATCH** /v1/api/runs/{id} | 
 [**retrieve_api_key**](V1Api.md#retrieve_api_key) | **GET** /v1/api/api-keys/{id} | 
+[**retrieve_chart_data**](V1Api.md#retrieve_chart_data) | **GET** /v1/api/chart/{id} | 
 [**retrieve_data_point**](V1Api.md#retrieve_data_point) | **GET** /v1/api/data/{id} | 
 [**retrieve_metrics_data**](V1Api.md#retrieve_metrics_data) | **GET** /v1/api/metrics/{id} | 
 [**retrieve_ml_model**](V1Api.md#retrieve_ml_model) | **GET** /v1/api/model/{id} | 
@@ -45,6 +48,7 @@ Method | HTTP request | Description
 [**retrieve_project_detail**](V1Api.md#retrieve_project_detail) | **GET** /v1/api/projects/{id} | 
 [**retrieve_prompt**](V1Api.md#retrieve_prompt) | **GET** /v1/api/prompts/{id} | 
 [**retrieve_run**](V1Api.md#retrieve_run) | **GET** /v1/api/runs/{id} | 
+[**stat_project**](V1Api.md#stat_project) | **GET** /v1/api/projects/{id}/stat | 
 [**update_api_key_update**](V1Api.md#update_api_key_update) | **PUT** /v1/api/api-keys/{id} | 
 [**update_data_point_create**](V1Api.md#update_data_point_create) | **PUT** /v1/api/data/{id} | 
 [**update_metrics_data**](V1Api.md#update_metrics_data) | **PUT** /v1/api/metrics/{id} | 
@@ -115,7 +119,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -184,7 +188,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -254,7 +258,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -323,7 +327,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -392,7 +396,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -461,7 +465,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -472,8 +476,8 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **create_project**
-> Project create_project(project=project)
+# **create_project_create**
+> ProjectCreate create_project_create(project_create=project_create)
 
 
 
@@ -486,7 +490,7 @@ No authorization required
 import time
 import os
 import xleap._client
-from xleap._client.models.project import Project
+from xleap._client.models.project_create import ProjectCreate
 from xleap._client.rest import ApiException
 from pprint import pprint
 
@@ -501,14 +505,14 @@ configuration = xleap._client.Configuration(
 with xleap._client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xleap._client.V1Api(api_client)
-    project = xleap._client.Project() # Project |  (optional)
+    project_create = xleap._client.ProjectCreate() # ProjectCreate |  (optional)
 
     try:
-        api_response = api_instance.create_project(project=project)
-        print("The response of V1Api->create_project:\n")
+        api_response = api_instance.create_project_create(project_create=project_create)
+        print("The response of V1Api->create_project_create:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling V1Api->create_project: %s\n" % e)
+        print("Exception when calling V1Api->create_project_create: %s\n" % e)
 ```
 
 
@@ -518,11 +522,11 @@ with xleap._client.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **project** | [**Project**](Project.md)|  | [optional] 
+ **project_create** | [**ProjectCreate**](ProjectCreate.md)|  | [optional] 
 
 ### Return type
 
-[**Project**](Project.md)
+[**ProjectCreate**](ProjectCreate.md)
 
 ### Authorization
 
@@ -530,7 +534,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -599,7 +603,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -668,7 +672,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -1087,6 +1091,75 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **exchange_token_exchange_token_request**
+> ExchangeTokenRequest exchange_token_exchange_token_request(exchange_token_request=exchange_token_request)
+
+
+
+given credentials get token pair.
+
+### Example
+
+
+```python
+import time
+import os
+import xleap._client
+from xleap._client.models.exchange_token_request import ExchangeTokenRequest
+from xleap._client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = xleap._client.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with xleap._client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xleap._client.V1Api(api_client)
+    exchange_token_request = xleap._client.ExchangeTokenRequest() # ExchangeTokenRequest |  (optional)
+
+    try:
+        api_response = api_instance.exchange_token_exchange_token_request(exchange_token_request=exchange_token_request)
+        print("The response of V1Api->exchange_token_exchange_token_request:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling V1Api->exchange_token_exchange_token_request: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **exchange_token_request** | [**ExchangeTokenRequest**](ExchangeTokenRequest.md)|  | [optional] 
+
+### Return type
+
+[**ExchangeTokenRequest**](ExchangeTokenRequest.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_api_key_token_obtain**
 > TokenResponse get_api_key_token_obtain(token_obtain=token_obtain)
 
@@ -1146,7 +1219,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -1222,8 +1295,73 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_user_settings_user_preference**
+> UserPreference get_user_settings_user_preference()
+
+
+
+
+
+### Example
+
+
+```python
+import time
+import os
+import xleap._client
+from xleap._client.models.user_preference import UserPreference
+from xleap._client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = xleap._client.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with xleap._client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xleap._client.V1Api(api_client)
+
+    try:
+        api_response = api_instance.get_user_settings_user_preference()
+        print("The response of V1Api->get_user_settings_user_preference:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling V1Api->get_user_settings_user_preference: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**UserPreference**](UserPreference.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **list_api_keys**
-> ListAPIKeys200Response list_api_keys(cursor=cursor)
+> ListAPIKeys200Response list_api_keys(cursor=cursor, page_size=page_size)
 
 
 
@@ -1252,9 +1390,10 @@ with xleap._client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xleap._client.V1Api(api_client)
     cursor = 'cursor_example' # str | The pagination cursor value. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
 
     try:
-        api_response = api_instance.list_api_keys(cursor=cursor)
+        api_response = api_instance.list_api_keys(cursor=cursor, page_size=page_size)
         print("The response of V1Api->list_api_keys:\n")
         pprint(api_response)
     except Exception as e:
@@ -1269,6 +1408,7 @@ with xleap._client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **str**| The pagination cursor value. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
 
 ### Return type
 
@@ -1292,7 +1432,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_data_points**
-> ListDataPoints200Response list_data_points(cursor=cursor)
+> ListDataPoints200Response list_data_points(cursor=cursor, page_size=page_size, project=project, include_all=include_all, filter=filter)
 
 
 
@@ -1321,9 +1461,13 @@ with xleap._client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xleap._client.V1Api(api_client)
     cursor = 'cursor_example' # str | The pagination cursor value. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
+    project = 'project_example' # str | project (optional)
+    include_all = 'include_all_example' # str | include_all (optional)
+    filter = 'filter_example' # str | Filter (optional)
 
     try:
-        api_response = api_instance.list_data_points(cursor=cursor)
+        api_response = api_instance.list_data_points(cursor=cursor, page_size=page_size, project=project, include_all=include_all, filter=filter)
         print("The response of V1Api->list_data_points:\n")
         pprint(api_response)
     except Exception as e:
@@ -1338,6 +1482,10 @@ with xleap._client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **str**| The pagination cursor value. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
+ **project** | **str**| project | [optional] 
+ **include_all** | **str**| include_all | [optional] 
+ **filter** | **str**| Filter | [optional] 
 
 ### Return type
 
@@ -1361,7 +1509,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_metrics_datas**
-> ListMetricsDatas200Response list_metrics_datas(cursor=cursor)
+> ListMetricsDatas200Response list_metrics_datas(cursor=cursor, page_size=page_size)
 
 
 
@@ -1390,9 +1538,10 @@ with xleap._client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xleap._client.V1Api(api_client)
     cursor = 'cursor_example' # str | The pagination cursor value. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
 
     try:
-        api_response = api_instance.list_metrics_datas(cursor=cursor)
+        api_response = api_instance.list_metrics_datas(cursor=cursor, page_size=page_size)
         print("The response of V1Api->list_metrics_datas:\n")
         pprint(api_response)
     except Exception as e:
@@ -1407,6 +1556,7 @@ with xleap._client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **str**| The pagination cursor value. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
 
 ### Return type
 
@@ -1430,7 +1580,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_ml_models**
-> ListMLModels200Response list_ml_models(cursor=cursor)
+> ListMLModels200Response list_ml_models(cursor=cursor, page_size=page_size)
 
 
 
@@ -1459,9 +1609,10 @@ with xleap._client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xleap._client.V1Api(api_client)
     cursor = 'cursor_example' # str | The pagination cursor value. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
 
     try:
-        api_response = api_instance.list_ml_models(cursor=cursor)
+        api_response = api_instance.list_ml_models(cursor=cursor, page_size=page_size)
         print("The response of V1Api->list_ml_models:\n")
         pprint(api_response)
     except Exception as e:
@@ -1476,6 +1627,7 @@ with xleap._client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **str**| The pagination cursor value. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
 
 ### Return type
 
@@ -1499,7 +1651,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_org_lists**
-> ListOrgLists200Response list_org_lists(cursor=cursor)
+> ListOrgLists200Response list_org_lists(cursor=cursor, page_size=page_size)
 
 
 
@@ -1528,9 +1680,10 @@ with xleap._client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xleap._client.V1Api(api_client)
     cursor = 'cursor_example' # str | The pagination cursor value. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
 
     try:
-        api_response = api_instance.list_org_lists(cursor=cursor)
+        api_response = api_instance.list_org_lists(cursor=cursor, page_size=page_size)
         print("The response of V1Api->list_org_lists:\n")
         pprint(api_response)
     except Exception as e:
@@ -1545,6 +1698,7 @@ with xleap._client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **str**| The pagination cursor value. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
 
 ### Return type
 
@@ -1568,7 +1722,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_projects**
-> ListProjects200Response list_projects(cursor=cursor)
+> ListProjects200Response list_projects(cursor=cursor, page_size=page_size)
 
 
 
@@ -1597,9 +1751,10 @@ with xleap._client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xleap._client.V1Api(api_client)
     cursor = 'cursor_example' # str | The pagination cursor value. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
 
     try:
-        api_response = api_instance.list_projects(cursor=cursor)
+        api_response = api_instance.list_projects(cursor=cursor, page_size=page_size)
         print("The response of V1Api->list_projects:\n")
         pprint(api_response)
     except Exception as e:
@@ -1614,6 +1769,7 @@ with xleap._client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **str**| The pagination cursor value. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
 
 ### Return type
 
@@ -1637,7 +1793,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_prompts**
-> ListPrompts200Response list_prompts(cursor=cursor, parent_id=parent_id, root_id=root_id, base_query=base_query)
+> ListPrompts200Response list_prompts(cursor=cursor, page_size=page_size, parent_id=parent_id, root_id=root_id, base_query=base_query)
 
 
 
@@ -1666,12 +1822,13 @@ with xleap._client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xleap._client.V1Api(api_client)
     cursor = 'cursor_example' # str | The pagination cursor value. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
     parent_id = 'parent_id_example' # str | parent_id (optional)
     root_id = 'root_id_example' # str | root_id (optional)
     base_query = 'base_query_example' # str | base_query (optional)
 
     try:
-        api_response = api_instance.list_prompts(cursor=cursor, parent_id=parent_id, root_id=root_id, base_query=base_query)
+        api_response = api_instance.list_prompts(cursor=cursor, page_size=page_size, parent_id=parent_id, root_id=root_id, base_query=base_query)
         print("The response of V1Api->list_prompts:\n")
         pprint(api_response)
     except Exception as e:
@@ -1686,6 +1843,7 @@ with xleap._client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **str**| The pagination cursor value. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
  **parent_id** | **str**| parent_id | [optional] 
  **root_id** | **str**| root_id | [optional] 
  **base_query** | **str**| base_query | [optional] 
@@ -1712,7 +1870,7 @@ No authorization required
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_runs**
-> ListRuns200Response list_runs(cursor=cursor, parent_run_id=parent_run_id, session_name=session_name, root_node=root_node)
+> ListRuns200Response list_runs(cursor=cursor, page_size=page_size, parent_run_id=parent_run_id, session_name=session_name, root_node=root_node)
 
 
 
@@ -1741,12 +1899,13 @@ with xleap._client.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = xleap._client.V1Api(api_client)
     cursor = 'cursor_example' # str | The pagination cursor value. (optional)
+    page_size = 56 # int | Number of results to return per page. (optional)
     parent_run_id = 'parent_run_id_example' # str | parent_run_id (optional)
     session_name = 'session_name_example' # str | session_name (optional)
     root_node = 'root_node_example' # str | root_node (optional)
 
     try:
-        api_response = api_instance.list_runs(cursor=cursor, parent_run_id=parent_run_id, session_name=session_name, root_node=root_node)
+        api_response = api_instance.list_runs(cursor=cursor, page_size=page_size, parent_run_id=parent_run_id, session_name=session_name, root_node=root_node)
         print("The response of V1Api->list_runs:\n")
         pprint(api_response)
     except Exception as e:
@@ -1761,6 +1920,7 @@ with xleap._client.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **cursor** | **str**| The pagination cursor value. | [optional] 
+ **page_size** | **int**| Number of results to return per page. | [optional] 
  **parent_run_id** | **str**| parent_run_id | [optional] 
  **session_name** | **str**| session_name | [optional] 
  **root_node** | **str**| root_node | [optional] 
@@ -1846,7 +2006,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -1918,7 +2078,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -1989,7 +2149,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -2060,7 +2220,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -2131,7 +2291,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -2202,7 +2362,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -2279,7 +2439,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -2356,7 +2516,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -2418,6 +2578,79 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**APIKey**](APIKey.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **retrieve_chart_data**
+> ChartData retrieve_chart_data(id, metric=metric, count=count)
+
+
+
+
+
+### Example
+
+
+```python
+import time
+import os
+import xleap._client
+from xleap._client.models.chart_data import ChartData
+from xleap._client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = xleap._client.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with xleap._client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xleap._client.V1Api(api_client)
+    id = 'id_example' # str | 
+    metric = 'metric_example' # str | metric (optional)
+    count = 'count_example' # str | count (optional)
+
+    try:
+        api_response = api_instance.retrieve_chart_data(id, metric=metric, count=count)
+        print("The response of V1Api->retrieve_chart_data:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling V1Api->retrieve_chart_data: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**|  | 
+ **metric** | **str**| metric | [optional] 
+ **count** | **str**| count | [optional] 
+
+### Return type
+
+[**ChartData**](ChartData.md)
 
 ### Authorization
 
@@ -2931,6 +3164,75 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **stat_project**
+> Project stat_project(id)
+
+
+
+
+
+### Example
+
+
+```python
+import time
+import os
+import xleap._client
+from xleap._client.models.project import Project
+from xleap._client.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to http://localhost
+# See configuration.py for a list of all supported configuration parameters.
+configuration = xleap._client.Configuration(
+    host = "http://localhost"
+)
+
+
+# Enter a context with an instance of the API client
+with xleap._client.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = xleap._client.V1Api(api_client)
+    id = 'id_example' # str | 
+
+    try:
+        api_response = api_instance.stat_project(id)
+        print("The response of V1Api->stat_project:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling V1Api->stat_project: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**|  | 
+
+### Return type
+
+[**Project**](Project.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **update_api_key_update**
 > APIKeyUpdate update_api_key_update(id, api_key_update=api_key_update)
 
@@ -2991,7 +3293,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -3063,7 +3365,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -3134,7 +3436,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -3205,7 +3507,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -3276,7 +3578,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -3347,7 +3649,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -3424,7 +3726,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details
@@ -3501,7 +3803,7 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: application/json, application/x-www-form-urlencoded, multipart/form-data
  - **Accept**: application/json
 
 ### HTTP response details

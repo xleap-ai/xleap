@@ -23,6 +23,8 @@ from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr
 from typing_extensions import Annotated
 
+from xleap._client.models.project_config import ProjectConfig
+
 try:
     from typing import Self
 except ImportError:
@@ -35,12 +37,14 @@ class ProjectDetail(BaseModel):
     """  # noqa: E501
 
     id: Optional[StrictStr] = None
+    config: ProjectConfig
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
     name: Annotated[str, Field(strict=True, max_length=100)]
     org: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = [
         "id",
+        "config",
         "created_at",
         "updated_at",
         "name",
@@ -89,6 +93,9 @@ class ProjectDetail(BaseModel):
             },
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of config
+        if self.config:
+            _dict["config"] = self.config.to_dict()
         # set to None if org (nullable) is None
         # and model_fields_set contains the field
         if self.org is None and "org" in self.model_fields_set:
@@ -108,6 +115,9 @@ class ProjectDetail(BaseModel):
         _obj = cls.model_validate(
             {
                 "id": obj.get("id"),
+                "config": ProjectConfig.from_dict(obj.get("config"))
+                if obj.get("config") is not None
+                else None,
                 "created_at": obj.get("created_at"),
                 "updated_at": obj.get("updated_at"),
                 "name": obj.get("name"),

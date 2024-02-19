@@ -6,11 +6,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** |  | [optional] [readonly] 
-**prompt** | **str** | question for LLM | [optional] 
-**response** | **str** | LLM response | [optional] 
+**question** | **str** |  | [optional] [readonly] 
+**answer** | **str** |  | [optional] [readonly] 
+**ground_truths** | **List[object]** |  | 
+**result** | [**DataPointResult**](DataPointResult.md) |  | 
 **contexts** | **List[str]** |  | [optional] 
-**answers** | **List[str]** |  | [optional] 
-**result** | **object** |  | [optional] 
+**tags** | **object** |  | [optional] 
 
 ## Example
 

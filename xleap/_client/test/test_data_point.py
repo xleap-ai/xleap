@@ -37,18 +37,27 @@ class TestDataPoint(unittest.TestCase):
         if include_optional:
             return DataPoint(
                 id = '',
-                prompt = '',
-                response = '',
+                question = '',
+                answer = '',
+                ground_truths = [
+                    null
+                    ],
+                result = xleap._client.models.data_point_result.DataPoint_result(
+                    results = xleap._client.models.results.results(), 
+                    reasons = xleap._client.models.reasons.reasons(), ),
                 contexts = [
                     ''
                     ],
-                answers = [
-                    ''
-                    ],
-                result = None
+                tags = None
             )
         else:
             return DataPoint(
+                ground_truths = [
+                    null
+                    ],
+                result = xleap._client.models.data_point_result.DataPoint_result(
+                    results = xleap._client.models.results.results(), 
+                    reasons = xleap._client.models.reasons.reasons(), ),
         )
         """
 

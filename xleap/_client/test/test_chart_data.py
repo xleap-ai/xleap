@@ -14,11 +14,11 @@
 
 import unittest
 
-from xleap._client.models.data_point_create import DataPointCreate
+from xleap._client.models.chart_data import ChartData
 
 
-class TestDataPointCreate(unittest.TestCase):
-    """DataPointCreate unit test stubs"""
+class TestChartData(unittest.TestCase):
+    """ChartData unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,36 +26,32 @@ class TestDataPointCreate(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> DataPointCreate:
-        """Test DataPointCreate
+    def make_instance(self, include_optional) -> ChartData:
+        """Test ChartData
         include_option is a boolean, when False only required
         params are included, when True both required and
         optional params are included"""
-        # uncomment below to create an instance of `DataPointCreate`
+        # uncomment below to create an instance of `ChartData`
         """
-        model = DataPointCreate()
+        model = ChartData()
         if include_optional:
-            return DataPointCreate(
-                question = '',
-                answer = '',
-                ground_truths = [
-                    null
-                    ],
-                contexts = [
-                    ''
-                    ],
-                project = '',
-                tags = None
+            return ChartData(
+                metric = '',
+                values = [
+                    1.337
+                    ]
             )
         else:
-            return DataPointCreate(
-                question = '',
-                answer = '',
+            return ChartData(
+                metric = '',
+                values = [
+                    1.337
+                    ],
         )
         """
 
-    def testDataPointCreate(self):
-        """Test DataPointCreate"""
+    def testChartData(self):
+        """Test ChartData"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

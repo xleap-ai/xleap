@@ -17,13 +17,10 @@ from __future__ import annotations
 import json
 import pprint
 import re  # noqa: F401
-from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field
 from typing_extensions import Annotated
-
-from xleap._client.models.project_config import ProjectConfig
 
 try:
     from typing import Self
@@ -31,25 +28,15 @@ except ImportError:
     from typing_extensions import Self
 
 
-class Project(BaseModel):
+class UserPreference(BaseModel):
     """
-    Project
+    UserPreference
     """  # noqa: E501
 
-    id: Optional[StrictStr] = None
-    config: ProjectConfig
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    name: Annotated[str, Field(strict=True, max_length=100)]
-    org: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = [
-        "id",
-        "config",
-        "created_at",
-        "updated_at",
-        "name",
-        "org",
-    ]
+    selected_project: Optional[
+        Annotated[str, Field(strict=True, max_length=50)]
+    ] = Field(default=None, description="the last selected project of the user")
+    __properties: ClassVar[List[str]] = ["selected_project"]
 
     model_config = {
         "populate_by_name": True,
@@ -68,7 +55,7 @@ class Project(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of Project from a JSON string"""
+        """Create an instance of UserPreference from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,48 +67,30 @@ class Project(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-                "id",
-                "created_at",
-                "updated_at",
-            },
+            exclude={},
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of config
-        if self.config:
-            _dict["config"] = self.config.to_dict()
-        # set to None if org (nullable) is None
+        # set to None if selected_project (nullable) is None
         # and model_fields_set contains the field
-        if self.org is None and "org" in self.model_fields_set:
-            _dict["org"] = None
+        if (
+            self.selected_project is None
+            and "selected_project" in self.model_fields_set
+        ):
+            _dict["selected_project"] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of Project from a dict"""
+        """Create an instance of UserPreference from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "id": obj.get("id"),
-                "config": ProjectConfig.from_dict(obj.get("config"))
-                if obj.get("config") is not None
-                else None,
-                "created_at": obj.get("created_at"),
-                "updated_at": obj.get("updated_at"),
-                "name": obj.get("name"),
-                "org": obj.get("org"),
-            }
-        )
+        _obj = cls.model_validate({"selected_project": obj.get("selected_project")})
         return _obj

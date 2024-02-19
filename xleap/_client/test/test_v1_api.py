@@ -50,8 +50,8 @@ class TestV1Api(unittest.TestCase):
         """Test case for create_org_list"""
         pass
 
-    def test_create_project(self) -> None:
-        """Test case for create_project"""
+    def test_create_project_create(self) -> None:
+        """Test case for create_project_create"""
         pass
 
     def test_create_prompt(self) -> None:
@@ -86,12 +86,20 @@ class TestV1Api(unittest.TestCase):
         """Test case for destroy_run"""
         pass
 
+    def test_exchange_token_exchange_token_request(self) -> None:
+        """Test case for exchange_token_exchange_token_request"""
+        pass
+
     def test_get_api_key_token_obtain(self) -> None:
         """Test case for get_api_key_token_obtain"""
         pass
 
     def test_get_user_org_member(self) -> None:
         """Test case for get_user_org_member"""
+        pass
+
+    def test_get_user_settings_user_preference(self) -> None:
+        """Test case for get_user_settings_user_preference"""
         pass
 
     def test_list_api_keys(self) -> None:
@@ -162,6 +170,10 @@ class TestV1Api(unittest.TestCase):
         """Test case for retrieve_api_key"""
         pass
 
+    def test_retrieve_chart_data(self) -> None:
+        """Test case for retrieve_chart_data"""
+        pass
+
     def test_retrieve_data_point(self) -> None:
         """Test case for retrieve_data_point"""
         pass
@@ -188,6 +200,10 @@ class TestV1Api(unittest.TestCase):
 
     def test_retrieve_run(self) -> None:
         """Test case for retrieve_run"""
+        pass
+
+    def test_stat_project(self) -> None:
+        """Test case for stat_project"""
         pass
 
     def test_update_api_key_update(self) -> None:

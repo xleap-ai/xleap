@@ -20,10 +20,8 @@ import re  # noqa: F401
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictInt, field_validator
 from typing_extensions import Annotated
-
-from xleap._client.models.project_config import ProjectConfig
 
 try:
     from typing import Self
@@ -31,25 +29,32 @@ except ImportError:
     from typing_extensions import Self
 
 
-class Project(BaseModel):
+class ExchangeTokenRequestUser(BaseModel):
     """
-    Project
+    ExchangeTokenRequestUser
     """  # noqa: E501
 
-    id: Optional[StrictStr] = None
-    config: ProjectConfig
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
-    name: Annotated[str, Field(strict=True, max_length=100)]
-    org: Optional[StrictStr] = None
+    username: Annotated[str, Field(strict=True, max_length=150)] = Field(
+        description="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+    )
+    id: Optional[StrictInt] = None
+    first_name: Optional[Annotated[str, Field(strict=True, max_length=150)]] = None
+    last_name: Optional[Annotated[str, Field(strict=True, max_length=150)]] = None
+    date_joined: Optional[datetime] = None
     __properties: ClassVar[List[str]] = [
+        "username",
         "id",
-        "config",
-        "created_at",
-        "updated_at",
-        "name",
-        "org",
+        "first_name",
+        "last_name",
+        "date_joined",
     ]
+
+    @field_validator("username")
+    def username_validate_regular_expression(cls, value):
+        """Validates the regular expression"""
+        if not re.match(r"^[\w.@+-]+\z", value):
+            raise ValueError(r"must validate the regular expression /^[\w.@+-]+\z/")
+        return value
 
     model_config = {
         "populate_by_name": True,
@@ -68,7 +73,7 @@ class Project(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of Project from a JSON string"""
+        """Create an instance of ExchangeTokenRequestUser from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -82,30 +87,20 @@ class Project(BaseModel):
           are ignored.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
-        * OpenAPI `readOnly` fields are excluded.
         """
         _dict = self.model_dump(
             by_alias=True,
             exclude={
                 "id",
-                "created_at",
-                "updated_at",
+                "date_joined",
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of config
-        if self.config:
-            _dict["config"] = self.config.to_dict()
-        # set to None if org (nullable) is None
-        # and model_fields_set contains the field
-        if self.org is None and "org" in self.model_fields_set:
-            _dict["org"] = None
-
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of Project from a dict"""
+        """Create an instance of ExchangeTokenRequestUser from a dict"""
         if obj is None:
             return None
 
@@ -114,14 +109,11 @@ class Project(BaseModel):
 
         _obj = cls.model_validate(
             {
+                "username": obj.get("username"),
                 "id": obj.get("id"),
-                "config": ProjectConfig.from_dict(obj.get("config"))
-                if obj.get("config") is not None
-                else None,
-                "created_at": obj.get("created_at"),
-                "updated_at": obj.get("updated_at"),
-                "name": obj.get("name"),
-                "org": obj.get("org"),
+                "first_name": obj.get("first_name"),
+                "last_name": obj.get("last_name"),
+                "date_joined": obj.get("date_joined"),
             }
         )
         return _obj

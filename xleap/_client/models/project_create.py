@@ -23,7 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, Field, StrictStr
 from typing_extensions import Annotated
 
-from xleap._client.models.project_config import ProjectConfig
+from xleap._client.models.project_create_config import ProjectCreateConfig
 
 try:
     from typing import Self
@@ -31,13 +31,13 @@ except ImportError:
     from typing_extensions import Self
 
 
-class Project(BaseModel):
+class ProjectCreate(BaseModel):
     """
-    Project
+    ProjectCreate
     """  # noqa: E501
 
     id: Optional[StrictStr] = None
-    config: ProjectConfig
+    config: Optional[ProjectCreateConfig] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
     name: Annotated[str, Field(strict=True, max_length=100)]
@@ -68,7 +68,7 @@ class Project(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of Project from a JSON string"""
+        """Create an instance of ProjectCreate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -105,7 +105,7 @@ class Project(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of Project from a dict"""
+        """Create an instance of ProjectCreate from a dict"""
         if obj is None:
             return None
 
@@ -115,7 +115,7 @@ class Project(BaseModel):
         _obj = cls.model_validate(
             {
                 "id": obj.get("id"),
-                "config": ProjectConfig.from_dict(obj.get("config"))
+                "config": ProjectCreateConfig.from_dict(obj.get("config"))
                 if obj.get("config") is not None
                 else None,
                 "created_at": obj.get("created_at"),

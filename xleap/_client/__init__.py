@@ -33,8 +33,12 @@ from xleap._client.exceptions import ApiException
 # import models into sdk package
 from xleap._client.models.api_key import APIKey
 from xleap._client.models.api_key_update import APIKeyUpdate
+from xleap._client.models.chart_data import ChartData
 from xleap._client.models.data_point import DataPoint
 from xleap._client.models.data_point_create import DataPointCreate
+from xleap._client.models.data_point_result import DataPointResult
+from xleap._client.models.exchange_token_request import ExchangeTokenRequest
+from xleap._client.models.exchange_token_request_user import ExchangeTokenRequestUser
 from xleap._client.models.list_api_keys200_response import ListAPIKeys200Response
 from xleap._client.models.list_data_points200_response import ListDataPoints200Response
 from xleap._client.models.list_ml_models200_response import ListMLModels200Response
@@ -52,9 +56,13 @@ from xleap._client.models.org_detail_members_inner import OrgDetailMembersInner
 from xleap._client.models.org_list import OrgList
 from xleap._client.models.org_member import OrgMember
 from xleap._client.models.project import Project
+from xleap._client.models.project_config import ProjectConfig
+from xleap._client.models.project_create import ProjectCreate
+from xleap._client.models.project_create_config import ProjectCreateConfig
 from xleap._client.models.project_detail import ProjectDetail
 from xleap._client.models.prompt import Prompt
 from xleap._client.models.run import Run
 from xleap._client.models.run_create import RunCreate
 from xleap._client.models.token_obtain import TokenObtain
 from xleap._client.models.token_response import TokenResponse
+from xleap._client.models.user_preference import UserPreference
