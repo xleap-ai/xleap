@@ -53,10 +53,16 @@ class OutputStructure(LLMMetric):
         if exists:
             return exists
 
-        human_prompt = OUTPUT_STRUCTURE.format(question=df[config.prompt_column], response=df[config.response_column])
+        human_prompt = OUTPUT_STRUCTURE.format(
+            question=df[config.prompt_column], response=df[config.response_column]
+        )
 
         result = self.llm._client.chat.completions.create(
-            messages=[ChatCompletionSystemMessageParam(content=human_prompt.content, role="system")],
+            messages=[
+                ChatCompletionSystemMessageParam(
+                    content=human_prompt.content, role="system"
+                )
+            ],
             n=1,
             temperature=0,
             model=self.llm.model,

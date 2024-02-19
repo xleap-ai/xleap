@@ -28,7 +28,9 @@ class PromptSentiment(Metric):
         self._stat = SentimentIntensityAnalyzer()
 
     def compute(self, df: Series, force=False) -> ItemResult:
-        return super().compute(df, force) or ItemResult(value=self._stat.polarity_scores(df[self.column])["compound"])
+        return super().compute(df, force) or ItemResult(
+            value=self._stat.polarity_scores(df[self.column])["compound"]
+        )
 
 
 class ResponseSentiment(PromptSentiment):

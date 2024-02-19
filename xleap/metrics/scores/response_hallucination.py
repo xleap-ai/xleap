@@ -103,11 +103,15 @@ class ConsistencyChecker:
     def get_samples(self, prompt):
         samples = []
         for _ in range(self.num_samples):
-            response: ChatLog = Conversation(self.sample_generator_llm).send_prompt(prompt)
+            response: ChatLog = Conversation(self.sample_generator_llm).send_prompt(
+                prompt
+            )
             samples.append(response)
         return samples
 
-    def sentence_semantic_score(self, response_sentence, samples_list, embeddings_encoder):
+    def sentence_semantic_score(
+        self, response_sentence, samples_list, embeddings_encoder
+    ):
         sample_similarities = []
         for sample in samples_list:
             sample_sentences = sent_tokenize(sample)
@@ -134,7 +138,9 @@ class ConsistencyChecker:
         response_sentences = sent_tokenize(response)
         samples_list = [sample.response for sample in additional_samples]
         response_similarities = [
-            self.sentence_semantic_score(sentence, samples_list, self.embeddings_encoder)
+            self.sentence_semantic_score(
+                sentence, samples_list, self.embeddings_encoder
+            )
             for sentence in response_sentences
         ]
         final_score = sum(response_similarities) / len(response_similarities)
@@ -170,7 +176,9 @@ class ConsistencyChecker:
 
                 Answer:
                 """
-                result: ChatLog = Conversation(self.consistency_checker_llm).send_prompt(prompt)
+                result: ChatLog = Conversation(
+                    self.consistency_checker_llm
+                ).send_prompt(prompt)
                 llm_score = self.convert_score(result.response)
                 llm_scores_half.append(llm_score)
                 total_tokens += result.total_tokens
@@ -180,7 +188,9 @@ class ConsistencyChecker:
 
     def consistency_check_with_samples(self, response, additional_samples):
         additional_samples = [ChatLog("", sample) for sample in additional_samples]
-        llm_score, tokens_usage = self.llm_consistency_check(response, additional_samples)
+        llm_score, tokens_usage = self.llm_consistency_check(
+            response, additional_samples
+        )
 
         semantic_score = self.semantic_score(response, additional_samples)
         consistency_result = ConsistencyResult(
@@ -193,7 +203,9 @@ class ConsistencyChecker:
         )
         return consistency_result
 
-    def consistency_check(self, prompt: str, response: Optional[str] = None) -> ConsistencyResult:
+    def consistency_check(
+        self, prompt: str, response: Optional[str] = None
+    ) -> ConsistencyResult:
         total_tokens = 0
 
         if not response:
@@ -206,9 +218,16 @@ class ConsistencyChecker:
                 raise Exception(f"Error generating response: {result.errors}")
 
         additional_samples: List[ChatLog] = self.get_samples(prompt)
-        total_tokens += sum([sample.total_tokens if sample.total_tokens else 0 for sample in additional_samples])
+        total_tokens += sum(
+            [
+                sample.total_tokens if sample.total_tokens else 0
+                for sample in additional_samples
+            ]
+        )
 
-        llm_score, tokens_usage = self.llm_consistency_check(response, additional_samples)
+        llm_score, tokens_usage = self.llm_consistency_check(
+            response, additional_samples
+        )
         total_tokens += tokens_usage
 
         semantic_score = self.semantic_score(response, additional_samples)
@@ -237,7 +256,9 @@ class ResponseHallucination(Metric):
         diagnostic_logger.info(
             "Info: the response_hallucination metric module performs additional LLM calls to check the consistency of the response."
         )
-        self._checker = ConsistencyChecker(self.llm, self.num_samples, embeddings_encoder)
+        self._checker = ConsistencyChecker(
+            self.llm, self.num_samples, embeddings_encoder
+        )
 
     def compute(self, df: Series, force=False) -> ItemResult:
         exists = super().compute(df, force)
@@ -245,7 +266,9 @@ class ResponseHallucination(Metric):
             return exists
 
         if self._checker is None:
-            raise Exception("Response Hallucination: you need to call init() before using this function")
+            raise Exception(
+                "Response Hallucination: you need to call init() before using this function"
+            )
 
         prompt, response = df[config.prompt_column], df[config.response_column]
         result = self._checker.consistency_check(prompt, response)

@@ -27,7 +27,9 @@ def make_batches(total_size: int, batch_size: int) -> list[range]:
     """
     tail = total_size % batch_size
     num_batches = floor(total_size / batch_size)
-    batches = [range(i, i + batch_size) for i in range(0, batch_size * num_batches, batch_size)]
+    batches = [
+        range(i, i + batch_size) for i in range(0, batch_size * num_batches, batch_size)
+    ]
     if tail != 0:
         batches.append(range(batch_size * num_batches, batch_size * num_batches + tail))
 

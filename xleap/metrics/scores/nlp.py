@@ -11,6 +11,7 @@ class BLEU(Metric):
 
     def init_model(self):
         import evaluate
+
         self._stat = evaluate.load("bleu")
 
     def compute(self, df: Series, force=False) -> ItemResult:
@@ -28,6 +29,7 @@ class Rouge(Metric):
 
     def init_model(self):
         import evaluate
+
         self._stat = evaluate.load("rouge")
 
     def compute(self, df: Series, force=False) -> ItemResult:
@@ -46,6 +48,7 @@ class Meteor(Metric):
 
     def init_model(self):
         import evaluate
+
         self._stat = evaluate.load("meteor")
 
     def compute(self, df: Series, force=False) -> ItemResult:
@@ -55,5 +58,3 @@ class Meteor(Metric):
                 references=[config.reference_corpus],
             )["meteor"]
         )
-
-
