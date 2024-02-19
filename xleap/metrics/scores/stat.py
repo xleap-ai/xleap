@@ -32,7 +32,7 @@ class TextStatMetric(Metric):
 
     def compute(self, df: pd.Series, force=False) -> ItemResult:
         return super().compute(df, force) or ItemResult(
-            self._stat(df[self.column]), self.name
+            value=self._stat(df[self.column]), reason=None
         )
 
     def __repr__(self) -> str:
