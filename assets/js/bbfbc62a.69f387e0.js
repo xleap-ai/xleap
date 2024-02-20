@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkxleap_docs=self.webpackChunkxleap_docs||[]).push([[5535],{648:a=>{a.exports=JSON.parse('{"label":"facebook","permalink":"/xleap/blog/tags/facebook","allTagsPath":"/xleap/blog/tags","count":1,"unlisted":false}')}}]);
