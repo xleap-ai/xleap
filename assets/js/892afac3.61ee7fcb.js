@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkxleap_docs=self.webpackChunkxleap_docs||[]).push([[7712],{5472:a=>{a.exports=JSON.parse('{"label":"hola","permalink":"/xleap/blog/tags/hola","allTagsPath":"/xleap/blog/tags","count":1,"unlisted":false}')}}]);

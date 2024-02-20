@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkxleap_docs=self.webpackChunkxleap_docs||[]).push([[5464],{7471:e=>{e.exports=JSON.parse('{"permalink":"/xleap/blog/tags/facebook","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);
