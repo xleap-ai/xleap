@@ -15,12 +15,13 @@ Given the following question which has all the related context available within 
 
 please output a structure score on a scale of 0 to 1 on how appropriately the response is to structured as per the question requirements in the following format
 distribute equal score for each specified criteria in the question.
-("score": "", "reason": "")
+("score": "<insert score here>", "reason": "<insert reason here in all cases>")
 
 If not structured as per the requirements, or if you believe the answer is not readable, return the json payload
 ("score": null, "reason": "response is unorganized")
 
 you're not allowed to make any changes to sentences given
+you're required to output a reason for all cases
 
 question: {question}
 response: {response}
@@ -70,4 +71,4 @@ class OutputStructure(LLMMetric):
 
         res = json.loads(result.choices[0].message.content)
 
-        result = ItemResult(value=res.get("score"), reason=res.get("reason"))
+        return ItemResult(value=str(res.get("score")), reason=str(res.get("reason")))

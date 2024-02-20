@@ -3,7 +3,7 @@ authors     = ["Pritam Soni <23050213+pritamsoni-hsr@users.noreply.github.com>"]
 description = "xleap's python sdk"
 name        = "xleap"
 readme      = "README.md"
-version     = "0.1.4"
+version     = "0.1.5"
 
 include  = ["CHANGELOG.md"]
 packages = [{ include = "xleap" }]

@@ -15,12 +15,11 @@ Given the following question which has all the related context available within,
 please output a relevancy score on a scale of 0 to 1 on how relevant the context is to answer the question in the following format
 ("score": "", "reason": "")
 
-
-
 If no relevant sentences are found, or if you believe the question cannot be answered from the given context, return the json payload
 ("score": null, "reason": "Insufficient Information")
 
 While extracting candidate sentences you're not allowed to make any changes to sentences given.
+you're required to output a reason for all cases
 
 question: {question}
 output:"""  # noqa: E501
