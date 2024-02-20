@@ -2,33 +2,38 @@
 sidebar_position: 3
 ---
 
-# Create a Blog Post
+# python requests
 
-Docusaurus creates a **page for each blog post**, but also a **blog index page**, a **tag system**, an **RSS** feed...
+1. go to account settings and create an API Key for CLI&nbsp; [open](http://google.com)
+2. copy the api key somewhere safe, it will be required in subsequent step
+3. start sending data using one of the following methods
 
-## Create your first Post
+```python title="setup.py"
+import requests
 
-Create a file at `blog/2021-02-28-greetings.md`:
+BASE_URL = "https://api.xleaplabs.com"
+API_KEY = "<********* private key from dashboard>"  # should be private
 
-```md title="blog/2021-02-28-greetings.md"
----
-slug: greetings
-title: Greetings!
-authors:
-  - name: Joel Marcey
-    title: Co-creator of Docusaurus 1
-    url: https://github.com/JoelMarcey
-    image_url: https://github.com/JoelMarcey.png
-  - name: Sébastien Lorber
-    title: Docusaurus maintainer
-    url: https://sebastienlorber.com
-    image_url: https://github.com/slorber.png
-tags: [greetings]
----
+response = requests.post(
+    f"{BASE_URL}/v1/api/data",
+    json={
+        {
+            "question": "<Your question or prompt template with {context_var}>",
+            "answer": "<llm response as text or stringified json>",
+            "contexts": [
+                "<array of strings sent to the llm model as key value pair>",
+                "context_var: this is sample context",
+            ],
+            "ground_truths": [],
+        }
+    },
+    headers={
+        "Authorization": f"API_KEY {API_KEY}",
+        "content-type": "application/json",
+    },
+)
 
-Congratulations, you have made your first post!
-
-Feel free to play around and edit this post as much as you like.
+print(response)
 ```
 
 A new blog post is now available at [http://localhost:3000/blog/greetings](http://localhost:3000/blog/greetings).

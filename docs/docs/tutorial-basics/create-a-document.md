@@ -2,56 +2,41 @@
 sidebar_position: 2
 ---
 
-# Create a Document
+# xleap's python sdk
 
-Documents are **groups of pages** connected through:
+1. go to account settings and create an API Key for CLI&nbsp; [open](http://google.com)
+2. copy the api key somewhere safe, it will be required in subsequent step
+3. start sending data using one of the following methods
 
-- a **sidebar**
-- **previous/next navigation**
-- **versioning**
+## install python sdk
 
-## Create your first Doc
-
-Create a Markdown file at `docs/hello.md`:
-
-```md title="docs/hello.md"
-# Hello
-
-This is my **first Docusaurus document**!
+```shell
+pip install xleap
 ```
 
-A new document is now available at [http://localhost:3000/docs/hello](http://localhost:3000/docs/hello).
+## start using sdk
 
-## Configure the Sidebar
+```python title="setup.py"
+from xleap.client import DataPointCreate, XleapApi
 
-Docusaurus automatically **creates a sidebar** from the `docs` folder.
+API_KEY = "<********* private key from dashboard>"  # should be private
 
-Add metadata to customize the sidebar label and position:
+client = XleapApi(api_key=API_KEY)
 
-```md title="docs/hello.md" {1-4}
----
-sidebar_label: 'Hi!'
-sidebar_position: 3
----
+response = client.create_data_point_create(
+    DataPointCreate(
+        **{
+            "question": "<Your question or prompt template with {context_var}>",
+            "answer": "<llm response as text or stringified json>",
+            "contexts": [
+                "<array of strings sent to the llm model as key value pair>",
+                "context_var: this is sample context",
+            ],
+            "ground_truths": [],
+        }
+    )
+)
 
-# Hello
 
-This is my **first Docusaurus document**!
-```
-
-It is also possible to create your sidebar explicitly in `sidebars.js`:
-
-```js title="sidebars.js"
-export default {
-  tutorialSidebar: [
-    'intro',
-    // highlight-next-line
-    'hello',
-    {
-      type: 'category',
-      label: 'Tutorial',
-      items: ['tutorial-basics/create-a-document'],
-    },
-  ],
-};
+print(response)
 ```

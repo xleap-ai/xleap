@@ -16,7 +16,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and used to get your website up and running
+        xLeap is designed from the ground up to be easily installed and used to get your website up and running
         quickly.
       </>
     ),
@@ -24,15 +24,10 @@ const FeatureList: FeatureItem[] = [
   {
     title: 'Focus on What Matters',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go ahead and move your docs into the{' '}
-        <code>docs</code> directory.
-      </>
-    ),
+    description: <>xLeap lets you focus on your product, and we&apos;ll do the chores.</>,
   },
   {
-    title: 'Powered by React',
+    title: 'Powered by opensource evaluation metrics',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
