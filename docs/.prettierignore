@@ -1,0 +1,10 @@
+**.json
+assets
+build
+node_modules
+
+**/openapi/**
+coverage
+.expo
+ios
+android
