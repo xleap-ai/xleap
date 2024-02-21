@@ -4,8 +4,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 import type { Config } from '@docusaurus/types';
 
 const config: Config = {
-  title: 'xLeap - LLM Evaluation',
-  tagline: 'Helping you evaluate LLMs',
+  title: 'xLeap - LLM Analytics',
+  tagline: 'Product Analytics for your LLM app',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -59,12 +59,13 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     // Replace with your project's social card
-    image: 'img/docusaurus-social-card.jpg',
+    image: 'img/xleap-social-card.jpg',
     navbar: {
       title: 'Home',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'xleap logo',
         src: 'img/logo.svg',
+        srcDark: 'img/logo-dark.svg',
       },
       items: [
         {
@@ -73,7 +74,7 @@ const config: Config = {
           position: 'left',
           label: 'Tutorial',
         },
-        { to: '/blog', label: 'Blog', position: 'left' },
+        // { to: '/blog', label: 'Blog', position: 'left' },
         {
           href: 'https://github.com/xleap-ai/xleap',
           label: 'GitHub',
@@ -101,34 +102,28 @@ const config: Config = {
               href: 'https://stackoverflow.com/questions/tagged/xleap',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/xleap',
+              label: 'Linkedin',
+              href: 'https://www.linkedin.com/company/xleap-ai/',
             },
-            {
-              label: 'Twitter',
-              href: 'https://twitter.com/xleap',
-            },
+            // {
+            //   label: 'Twitter',
+            //   href: 'https://twitter.com/xleap',
+            // },
           ],
         },
         {
           title: 'More',
           items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/xleap-ai/xleap',
-            },
+            // { label: 'Blog', to: '/blog' },
+            { label: 'GitHub', href: 'https://github.com/xleap-ai/xleap' },
           ],
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} xLeap AI`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
+      theme: prismThemes.oneLight,
+      darkTheme: prismThemes.oneDark,
     },
   } satisfies Preset.ThemeConfig,
 };

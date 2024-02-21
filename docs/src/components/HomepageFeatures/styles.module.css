@@ -5,6 +5,12 @@
   width: 100%;
 }
 
+@media screen and (min-width: 996px) {
+  .features {
+    padding: 8rem 0 2rem 0;
+  }
+}
+
 .featureSvg {
   height: 200px;
   width: 200px;

@@ -6,44 +6,36 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  // Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
 };
+
+// Easily integrate Nebuly's SDK with your favorite programming language and begin analyzing user data within minutes.
 
 const FeatureList: FeatureItem[] = [
   {
     title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
-      <>
-        xLeap is designed from the ground up to be easily installed and used to get your website up and running
-        quickly.
-      </>
+      <>xLeap's SDK is designed to be easily integrated within your project in your favorite programming language.</>
     ),
   },
   {
     title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    description: <>xLeap lets you focus on your product, and we&apos;ll do the chores.</>,
+    description: <>xLeap help you in analyzing user data within minutes, and lets you focus on what matters.</>,
   },
   {
-    title: 'Powered by opensource evaluation metrics',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Insightful dashboard',
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can be extended while reusing the same
-        header and footer.
+        xLeap's dashboard lets' you add view all LLM data, and add trigger to get notifications of critical edge cases.
       </>
     ),
   },
 ];
 
-function Feature({ title, Svg, description }: FeatureItem) {
+function Feature({ title, description }: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
-      <div className='text--center'>
-        <Svg className={styles.featureSvg} role='img' />
-      </div>
       <div className='text--center padding-horiz--md'>
         <Heading as='h3'>{title}</Heading>
         <p>{description}</p>
