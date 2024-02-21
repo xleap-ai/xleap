@@ -9,8 +9,6 @@ from tqdm import tqdm
 from xleap.metrics.llm_factory import XLeapLLM, llm_factory
 from xleap.metrics.validation import EvaluationMode
 
-logger = logging.getLogger(__name__)
-
 
 @dataclass
 class ItemResult:
@@ -39,6 +37,7 @@ def make_batches(total_size: int, batch_size: int) -> list[range]:
 @dataclass
 class Metric(ABC):
     batch_size: int
+    _logger = logging.getLogger(__name__)
 
     @property
     @abstractmethod
@@ -86,7 +85,9 @@ class Metric(ABC):
         set force=True to re-evaluate metric all the times
         """
         if not force and df[self.name] is not None:
-            # logger.info(f"skipping : {self.name} metric already evaluated")
+            self._logger.debug(
+                f"skipping metric {self.name}: already evaluated for {df.get('id')}"
+            )
             return df[self.name]
 
     def get_batches(self, dataset_size: int) -> list[range]:

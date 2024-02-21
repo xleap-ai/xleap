@@ -4,8 +4,9 @@ from dataclasses import dataclass
 import torch
 from pandas import Series
 
-from xleap.metrics.common import EvaluationMode, ItemResult, Metric
+from xleap.metrics.common import ItemResult, Metric
 from xleap.metrics.config import config
+from xleap.metrics.validation import EvaluationMode
 
 _USE_CUDA = torch.cuda.is_available() and not bool(os.getenv("XLEAP_NO_CUDA", False))
 

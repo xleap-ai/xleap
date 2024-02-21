@@ -3,7 +3,11 @@ authors     = ["Pritam Soni <23050213+pritamsoni-hsr@users.noreply.github.com>"]
 description = "xleap's python sdk"
 name        = "xleap"
 readme      = "README.md"
-version     = "0.1.5"
+version     = "0.1.6"
+
+documentation = "http://docs.xleaplabs.com"
+homepage      = "https://xleaplabs.com"
+repository    = "https://github.com/xleap-ai/xleap"
 
 include  = ["CHANGELOG.md"]
 packages = [{ include = "xleap" }]
@@ -42,3 +46,9 @@ select      = ["F", "I"]
 
 [tool.poetry.extras]
 all = ["evaluate", "sentence-transformers"]
+
+[tool.black]
+extend-exclude = "_client/*"
+include = '\.pyi?$'
+line-length = 88
+target-version = ['py311']

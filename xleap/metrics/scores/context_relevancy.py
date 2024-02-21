@@ -5,8 +5,9 @@ from langchain.prompts import HumanMessagePromptTemplate
 from openai.types.chat import ChatCompletionSystemMessageParam
 from pandas import Series
 
-from xleap.metrics.common import EvaluationMode, ItemResult, LLMMetric
+from xleap.metrics.common import ItemResult, LLMMetric
 from xleap.metrics.config import config
+from xleap.metrics.validation import EvaluationMode
 
 CONTEXT_RELEVANCE = HumanMessagePromptTemplate.from_template(
     """
@@ -65,5 +66,9 @@ class ContextRelevancy(LLMMetric):
             model=self.llm.model,
         )
 
+        self._logger.info(
+            f"{self.name} for {df.get('id')} got {result.choices[0].message.content}"
+        )
         res = json.loads(result.choices[0].message.content)
+
         return ItemResult(value=str(res.get("score")), reason=str(res.get("reason")))

@@ -69,6 +69,9 @@ class OutputStructure(LLMMetric):
             model=self.llm.model,
         )
 
+        self._logger.info(
+            f"{self.name} for {df.get('id')} got {result.choices[0].message.content}"
+        )
         res = json.loads(result.choices[0].message.content)
 
         return ItemResult(value=str(res.get("score")), reason=str(res.get("reason")))
