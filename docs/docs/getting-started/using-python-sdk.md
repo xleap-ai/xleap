@@ -2,16 +2,17 @@
 sidebar_position: 2
 ---
 
-# xleap's python sdk
+# xLeap's python sdk
 
-1. go to account settings and create an API Key for CLI&nbsp; [open](http://google.com)
-2. copy the api key somewhere safe, it will be required in subsequent step
-3. start sending data using one of the following methods
+1. Navigate to [_**Account Settings**_](http://app.xleaplabs.com/settings/api_keys) and generate an API Key for CLI
+   usage.
+2. Securely store your API Key. You'll need it for future steps.
+3. Start sending data using python SDK as documented next
 
 ## install python sdk
 
 ```shell
-pip install xleap
+pip install xLeap
 ```
 
 ## start using sdk

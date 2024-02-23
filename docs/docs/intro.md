@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-# Xleap Intro
+# xLeap Intro
 
-Let's discover **Xleap in less than 5 minutes**.
+Let's discover **xLeap in less than 5 minutes**.
 
 ## Getting Started with xLeap
 
@@ -30,12 +30,12 @@ The future lies in developing new kinds of evaluation tools for LLMs. These tool
 - Task-specific: Knowing which metrics for what type of tasks should be tracked.
 - Reliable: Providing a true reflection of how well the model works in different situations.
 
-PS: This is what our mission is at **[xleap ai](https://xleaplabs.com)**. We’re building a collaborative suite for
+PS: This is what our mission is at **[xLeap ai](https://xleaplabs.com)**. We’re building a collaborative suite for
 software devs and product managers of the world to ensure that they can accurately measure the LLMs performance and
 take LLM to their end-users.
 
 ### How long it takes to setup
 
-- xleap is built to setup everything in under 5 minutes
-  - we provide SDKs for your favourite programming language, python, javascript, typescript.
-  - for advanced control, we've documented our API to integrate in your product.
+- xLeap is designed for quick setup, with the entire process taking less than 5 minutes.
+- SDKs are available for popular programming languages, including Python, JavaScript, and TypeScript.
+<!-- - Comprehensive API documentation is provided for enhanced integration capabilities within your product. -->
