@@ -33,6 +33,12 @@ response = client.create_data_point_create(
                 "context_var: this is sample context",
             ],
             "ground_truths": [],
+            "tags": {
+                "key": "value",
+                "version": 1,
+                "env": "prod",
+                "client": "cli/web/runner",
+            },
         }
     )
 )

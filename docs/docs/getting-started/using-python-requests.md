@@ -25,6 +25,12 @@ response = requests.post(
                 "context_var: this is sample context",
             ],
             "ground_truths": [],
+            "tags": {
+                "key": "value",
+                "version": 1,
+                "env": "prod",
+                "client": "cli/web/runner",
+            },
         }
     },
     headers={

@@ -25,7 +25,12 @@ const response = await fetch(`${BASE_URL}/v1/api/data`, {
     answer: '<llm response as text or stringified json>',
     contexts: ['<array of strings sent to the llm model as key value pair>', 'context_var: this is sample context'],
     ground_truths: [],
-    tags: { key: 'value' },
+    tags: {
+      key: 'value',
+      version: 1,
+      env: 'prod',
+      client: 'cli/web/runner',
+    },
   }),
 });
 
