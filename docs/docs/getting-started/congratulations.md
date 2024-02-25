@@ -28,7 +28,8 @@ enhancing user experiences. Here's what you can look forward to:
 
 - **FAQs**: Visit our FAQs section for answers to common questions.
 
-- **Support**: For further assistance, contact our support team via email at support@xleaplabs.com.
+- **Support**: For further assistance, please
+  [create a ticket on the github repo](https://github.com/xleap-ai/xleap/issues/new)
 
 Thank you for choosing xLeap. We are excited to support you in harnessing the full potential of your LLM applications
 through actionable analytics and insights.
